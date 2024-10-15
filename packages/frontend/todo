@@ -1,0 +1,55 @@
+EmptyState as wrapper
+LoadingState as wrapper
+ErrorState as wrapper
+LoggedOutState as wrapper
+- --- match menu item and button sizes
+- btn rewrite
+- rewrite input
+  rewrite button classes with css properties -> easily add more data attributes (write in css?)
+
+
+- delete lists -> delete tasks inside
+- update types for list
+
+- menu item rewrite
+
+- optimistic update to task mutation
+- tests for backend
+
+- tiptap on task note
+- uno css preset
+  |
+  |-> radix (add color themes. eventually each list has its own color)
+
+solid-black btn -> less black btn
+style them switcher -> no borders for each btn
+
+- auth confirm email
+- auth reset password + magic link
+
+--- PHASE 2 ---
+
+- local storage persistence
+- optimistic updates
+- drag and drop ordering bug
+- lists ordering
+- add lists to a folder
+- smart lists
+- sort by
+- a dedicated list for shopping
+- steps for each tasks
+
+- show or hide lists
+- fix draggable list hydration error
+- arrows for post task and pre task
+- formkit list animation
+- emoji picker
+
+- if dragging -> use DraggableListContainer
+- if not dragging -> use formkit list animation
+
+--- PHASE 3 ---
+
+- AI input: get unorgnaized text and structre it to task, with due dates, priority, etc
+- AI sort tasks, give suggestions to plan my week, ... + based on I have ADHD
+- invite others to lists + assign tasks to them

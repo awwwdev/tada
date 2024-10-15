@@ -1,0 +1,24 @@
+authorization for update and delete and add ✅
+zod validation ✅
+CASL - implement one example ✅ 
+RLS - implement one example (too complicated)
+single or throw  ✅ 
+error messages  ✅ 
+
+import frontend types from backend
+
+tests
+
+smae structure for all response json messages
+
+
+
+things learnd 
+
+SQL >>>>>> No-SQL
+transaction are overhead
+
+/task/id
+/task/id?with-lists=true
+list/id?with-tasks=true
+folders/id?with-lists=true
