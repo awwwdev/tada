@@ -1,0 +1,64 @@
++ supabase 
++ drizzle
++ validation
++ access control
++ auth 
++ user confirm
++ user reset password
+
+make it more simple
+  -> server components for fetching
+  -> server actions for mutations
+
+  -> supabase for auth and dev
+
+
+- order for smart lists
+- scroll to bottom on task add 
+- invalidations 
+- optimistic updates 
+
+
+-- todopromax 
+- auth reset password + magic link (with supabase on todopromax)
+- local storage persistence
+- auth confirm email (with supabase on todopromax)
+
+- auth confirm email
+- auth reset password + magic link
+
+--- PHASE 2 ---
+
+- lists ordering
+- add lists to a folder 
+- smart lists
+- sort by
+- a dedicated list for shopping
+- steps for each tasks
+
+- show or hide lists ???
+- fix draggable list hydration error
+- arrows for post task and pre task
+
+--- PHASE 3 ---
+
+- AI input: get unorgnaized text and structre it to task, with due dates, priority, etc
+- AI sort tasks, give suggestions to plan my week, ... + based on I have ADHD
+- invite others to lists + assign tasks to them
+
+
+
+EmptyState as wrapper
+LoadingState as wrapper
+ErrorState as wrapper
+LoggedOutState as wrapper
+- --- match menu item and button sizes
+- btn rewrite
+- rewrite input
+  rewrite button classes with css properties -> easily add more data attributes (write in css?)
+- menu item rewrite
+- emoji picker
+
+solid-black btn -> less black btn
+style them switcher -> no borders for each btn
+
