@@ -10,7 +10,8 @@ import Drawer from "@/components/ui/Drawer";
 import UserList from "@/components/UserList";
 import SideMenu from '@/components/SideMenu';
 
-import type { List } from "@tada/backend";
+// import type { List } from "@tada/backend";
+
 export default function Page() {
   const { currentList } = useGlobalContext();
 
