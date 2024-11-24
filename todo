@@ -1,5 +1,22 @@
-+ supabase 
+workflow -> 
+✅ define schema in drizzle
+- define RLC policies in drizzle
+- generate drizzle migration 
+- migrate after build
+- get types from drizzle
+- generate types with supabase
+- use supabase client to get data from supabase 
+- use supabase client for modifications
+- use supabase client for auth 
+
+suspense query? 
+
+
 + drizzle
++ migrating production database
++ supabase 
++ supabase auth 
++ supabase user table connect to public user table
 + validation
 + access control
 + auth 
