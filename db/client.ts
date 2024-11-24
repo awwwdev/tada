@@ -7,7 +7,7 @@ import * as schema from '../schema/schema';
 
 
 const getDBClient = (connectionString?: string) => {
-  const client = postgres(connectionString ?? config().POSTGRESQL_CONNECTION_STRING);
+  const client = postgres(connectionString ?? config().POSTGRESQL_CONNECTION_STRING, {prepare: false});
   return drizzle(client, { schema: { ...schema, ...relations } });
 };
 
