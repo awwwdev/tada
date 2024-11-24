@@ -1,10 +1,16 @@
 import type { Config } from 'drizzle-kit';
+import config from "./config";
 
 export default {
 	schema: './schema/schema.ts',
-	out: 'drizzle',
+	out: './drizzle',
 	dialect: 'postgresql',
 	dbCredentials: {
-		url: process.env.POSTGRESQL_CONNECTION_STRING as string
+		// url: process.env.POSTGRESQL_CONNECTION_STRING as string
+		host: config().POSTGRESQL_HOST,
+		port: config().POSTGRESQL_PORT,
+		database: config().POSTGRESQL_DATABASE,
+		user: config().POSTGRESQL_USER,
+		password: config().POSTGRESQL_PASSWORD,
 	},
 } satisfies Config;
