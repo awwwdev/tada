@@ -9,10 +9,11 @@ const config = () => {
     POSTGRESQL_CONNECTION_STRING: process.env.POSTGRESQL_CONNECTION_STRING ?? 'value_not_provided',
     SESSION_SECRET_KEY: process.env.SESSION_SECRET_KEY ?? 'the flying elephant',
     FRONTEND_URL: process.env.FRONTEND_URL ?? 'http://localhost:3000',
-    PGHOST: process.env.PGHOST ?? '127.0.0.1',
-    PGUSER: process.env.PGUSER ?? 'postgres',
-    PGPASSWORD: process.env.PGPASSWORD ?? 'admin',
-    PGDATABASE: process.env.PGDATABASE ?? 'tada',
+    POSTGRESQL_HOST: process.env.POSTGRESQL_HOST ?? '127.0.0.1',
+    POSTGRESQL_PORT: Number(process.env.POSTGRESQL_PORT) ?? 54322,
+    POSTGRESQL_DATABASE: process.env.POSTGRESQL_DATABASE ?? 'tada',
+    POSTGRESQL_USER: process.env.POSTGRESQL_USER ?? 'postgres',
+    POSTGRESQL_PASSWORD: process.env.POSTGRESQL_PASSWORD ?? 'postgres',
   } as const;
 };
 
