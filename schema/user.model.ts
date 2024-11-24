@@ -1,6 +1,6 @@
-import { createInsertSchema, createSelectSchema } from 'drizzle-zod';
+import { createInsertSchema } from 'drizzle-zod';
 
-import { pgTable, text, uuid, customType, timestamp, json } from 'drizzle-orm/pg-core';
+import { customType, json, pgTable, text, timestamp, uuid } from 'drizzle-orm/pg-core';
 import { z } from 'zod';
 // import * as x from 'drizzle-orm/
 
@@ -20,10 +20,12 @@ export const USER = pgTable('user', {
   id: uuid('id').primaryKey().defaultRandom(),
   createdAt: timestamp('created_at').notNull().defaultNow(),
   updatedAt: timestamp('updated_at').$onUpdate(() => new Date()),
-  username: text('username').unique(),
+  // username: text('username').unique(),
+  authUserId: uuid('auth_user_id').notNull(),
   email: text('email').unique().notNull(),
-  passwordHash: bytea('password_hash').notNull(),
-  salt: bytea('salt').notNull(),
+  phone: text('phone').unique(),
+  // passwordHash: bytea('password_hash').notNull(),
+  // salt: bytea('salt').notNull(),
   settings: json('settings')
     .$type<Settings>()
     .default({ theme: 'system', showCompletedTasks: true, startOfWeek: 'sunday' }),

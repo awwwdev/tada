@@ -8,6 +8,20 @@
       "when": 1732083984059,
       "tag": "0000_early_dark_phoenix",
       "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "7",
+      "when": 1732113342593,
+      "tag": "0001_low_vin_gonzales",
+      "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1732115020336,
+      "tag": "0002_absurd_puppet_master",
+      "breakpoints": true
     }
   ]
 }
