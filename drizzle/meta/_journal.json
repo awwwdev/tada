@@ -43,6 +43,13 @@
       "when": 1732513085501,
       "tag": "0005_closed_vance_astro",
       "breakpoints": true
+    },
+    {
+      "idx": 6,
+      "version": "7",
+      "when": 1732514961474,
+      "tag": "0006_short_spirit",
+      "breakpoints": true
     }
   ]
 }
