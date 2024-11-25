@@ -1,9 +1,12 @@
 import { pgRole } from "drizzle-orm/pg-core";
 
 // drizzle-orm/supabase
-export const anonRole = pgRole('anon').existing();
-export const authenticatedRole = pgRole('authenticated').existing();
-export const serviceRole = pgRole('service_role').existing();
-export const postgresRole = pgRole('postgres_role').existing();
-export const supabaseAuthAdminRole = pgRole('supabase_auth_admin').existing();
+export const supabaseRoles = {
+  anonRole: pgRole('anon').existing(),
+  authenticatedRole: pgRole('authenticated').existing(),
+  serviceRole: pgRole('service_role').existing(),
+  postgresRole: pgRole('postgres_role').existing(),
+  supabaseAuthAdminRole: pgRole('supabase_auth_admin').existing()
+}
+
 

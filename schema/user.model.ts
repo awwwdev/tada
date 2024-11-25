@@ -1,6 +1,6 @@
 import { createInsertSchema } from "drizzle-zod";
 
-import { eq, sql, SQL } from "drizzle-orm";
+import { eq } from "drizzle-orm";
 import { customType, foreignKey, json, pgTable, pgView, text, timestamp, uuid } from "drizzle-orm/pg-core";
 import { z } from "zod";
 import { AUTH_USER } from "./supabaseTables";
@@ -45,7 +45,7 @@ export const USER = pgTable(
   ]
 );
 
-export const PROFILE = pgView("profile_view").as((qb) => qb.select({
+export const USER_VIEW = pgView("user_view").as((qb) => qb.select({
   email: AUTH_USER.email,
   phone: AUTH_USER.phone,
   settings: USER.settings,

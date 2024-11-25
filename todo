@@ -1,18 +1,18 @@
-auth.users + profile + user view (insert in profile + insert in user)
+auth.users + user + user view (insert in profile + insert in user)
 auth.user + profile (triggers + functions) insert in profile
 
 
 
 
 workflow ->
+✅ setup supabase local for development
 ✅ define schema in drizzle
-
 - define RLC policies in drizzle
-- define triggers in source code (not possible yet)
-- generate drizzle migration
+- define handle_new_user function_ in source code (not possible yet. Manually do on dev and prod)  
+✅ generate drizzle migration
 - migrate after build
 - get types from drizzle
-- generate types with supabase
+- or generate types with supabase
 - use supabase client to get data from supabase
 - use supabase client for modifications
 - use supabase client for auth
