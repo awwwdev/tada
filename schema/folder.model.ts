@@ -2,10 +2,12 @@
 
 
 
-import { decimal, pgTable, text, boolean, uuid, timestamp } from 'drizzle-orm/pg-core';
-import { USER } from './user.model';
+import { sql } from "drizzle-orm";
+import { boolean, decimal, pgPolicy, pgTable, text, timestamp, uuid } from 'drizzle-orm/pg-core';
 import { createInsertSchema } from 'drizzle-zod';
 import { z } from 'zod';
+import { supabaseRoles } from "./roles";
+import { USER } from './user.model';
 
 export const FOLDER = pgTable('folder', {
   id: uuid('id').primaryKey().defaultRandom(),
@@ -16,7 +18,17 @@ export const FOLDER = pgTable('folder', {
   authorId: uuid('author_id').references(() => USER.id),
   show: boolean('show'),
   orderInPanel: decimal('order_in_panel').default("0"),
-});
+}, (t) => [
+  pgPolicy('owner-has-full-access', {
+    as: 'permissive',
+    to: supabaseRoles.authenticatedRole,
+    for: "all",
+    using: sql`(select auth.uid()) = author_id`,
+    // withCheck: sql`TRUE`,
+  }),
+]
+
+);
 
 
 

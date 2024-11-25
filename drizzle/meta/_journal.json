@@ -64,6 +64,20 @@
       "when": 1732515316651,
       "tag": "0008_volatile_forge",
       "breakpoints": true
+    },
+    {
+      "idx": 9,
+      "version": "7",
+      "when": 1732515696070,
+      "tag": "0009_wealthy_ricochet",
+      "breakpoints": true
+    },
+    {
+      "idx": 10,
+      "version": "7",
+      "when": 1732515939087,
+      "tag": "0010_free_goliath",
+      "breakpoints": true
     }
   ]
 }

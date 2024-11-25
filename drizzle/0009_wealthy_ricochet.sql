@@ -1,0 +1,2 @@
+ALTER TABLE "folder" ENABLE ROW LEVEL SECURITY;--> statement-breakpoint
+CREATE POLICY "owner-has-full-access" ON "folder" AS PERMISSIVE FOR ALL TO "authenticated" USING ((select auth.uid()) = author_id);

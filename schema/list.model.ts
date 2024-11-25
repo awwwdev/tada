@@ -1,9 +1,11 @@
 import { createInsertSchema } from 'drizzle-zod';
 
-import { decimal, pgTable, text, boolean, uuid, timestamp, json } from 'drizzle-orm/pg-core';
-import { USER } from './user.model';
-import { FOLDER } from './folder.model';
+import { sql } from "drizzle-orm";
+import { boolean, decimal, json, pgPolicy, pgTable, text, timestamp, uuid } from 'drizzle-orm/pg-core';
 import { z } from 'zod';
+import { FOLDER } from './folder.model';
+import { supabaseRoles } from "./roles";
+import { USER } from './user.model';
 
 type Filters = {
   deleted?: boolean;
@@ -11,7 +13,7 @@ type Filters = {
   starred?: boolean;
   pinned?: boolean;
 };
-const LIST_HUES = ['red' , 'pink' , 'grape' , 'violet' , 'indigo' , 'blue' , 'cyan' , 'teal' , 'green' , 'lime' , 'yellow' , 'orange' , 'slate'] as const;
+const LIST_HUES = ['red', 'pink', 'grape', 'violet', 'indigo', 'blue', 'cyan', 'teal', 'green', 'lime', 'yellow', 'orange', 'slate'] as const;
 
 export type ListHue = typeof LIST_HUES[number];
 type ListTheme = {
@@ -32,7 +34,16 @@ export const LIST = pgTable('list', {
   orderInFolder: decimal('order_in_folder').default("0"),
   theme: json('theme').$type<ListTheme>().default({}),
   // orderOfTasks: uuid('order_of_tasks').references(() => TASK.id).array().notNull(),
-});
+}, (t) => [
+  pgPolicy('owner-has-full-access', {
+    as: 'permissive',
+    to: supabaseRoles.authenticatedRole,
+    for: "all",
+    using: sql`(select auth.uid()) = author_id`,
+    // withCheck: sql`TRUE`,
+  }),
+]
+);
 
 
 const refinements = {
