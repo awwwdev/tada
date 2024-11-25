@@ -1,8 +1,10 @@
 import { createInsertSchema } from 'drizzle-zod';
 
-import { integer, pgTable,  text, boolean, pgEnum, uuid, timestamp, AnyPgColumn, json  } from 'drizzle-orm/pg-core';
+import { integer, pgTable,  text, boolean, pgEnum, uuid, timestamp, AnyPgColumn, json, pgPolicy  } from 'drizzle-orm/pg-core';
 import { USER } from './user.model';
 import { z } from 'zod';
+import { sql } from "drizzle-orm";
+import * as supabaseRoles from "./roles";
 
 export const TaskStatusEnum = pgEnum('task_status', ['to-do', 'done']);
 
