@@ -1,42 +1,48 @@
-workflow -> 
+auth.users + profile + user view (insert in profile + insert in user)
+auth.user + profile (triggers + functions) insert in profile
+
+
+
+
+workflow ->
 ✅ define schema in drizzle
+
 - define RLC policies in drizzle
-- generate drizzle migration 
+- define triggers in source code (not possible yet)
+- generate drizzle migration
 - migrate after build
 - get types from drizzle
 - generate types with supabase
-- use supabase client to get data from supabase 
+- use supabase client to get data from supabase
 - use supabase client for modifications
-- use supabase client for auth 
+- use supabase client for auth
 
-suspense query? 
+suspense query?
 
-
-+ drizzle
-+ migrating production database
-+ supabase 
-+ supabase auth 
-+ supabase user table connect to public user table
-+ validation
-+ access control
-+ auth 
-+ user confirm
-+ user reset password
+- drizzle
+- migrating production database
+- supabase
+- supabase auth
+- supabase user table connect to public user table
+- validation
+- access control
+- auth
+- user confirm
+- user reset password
 
 make it more simple
-  -> server components for fetching
-  -> server actions for mutations
+-> server components for fetching
+-> server actions for mutations
 
-  -> supabase for auth and dev
-
+-> supabase for auth and dev
 
 - order for smart lists
-- scroll to bottom on task add 
-- invalidations 
-- optimistic updates 
+- scroll to bottom on task add
+- invalidations
+- optimistic updates
 
+-- todopromax
 
--- todopromax 
 - auth reset password + magic link (with supabase on todopromax)
 - local storage persistence
 - auth confirm email (with supabase on todopromax)
@@ -47,7 +53,7 @@ make it more simple
 --- PHASE 2 ---
 
 - lists ordering
-- add lists to a folder 
+- add lists to a folder
 - smart lists
 - sort by
 - a dedicated list for shopping
@@ -63,12 +69,11 @@ make it more simple
 - AI sort tasks, give suggestions to plan my week, ... + based on I have ADHD
 - invite others to lists + assign tasks to them
 
-
-
 EmptyState as wrapper
 LoadingState as wrapper
 ErrorState as wrapper
 LoggedOutState as wrapper
+
 - --- match menu item and button sizes
 - btn rewrite
 - rewrite input
@@ -78,4 +83,3 @@ LoggedOutState as wrapper
 
 solid-black btn -> less black btn
 style them switcher -> no borders for each btn
-

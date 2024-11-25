@@ -1,10 +1,7 @@
 import { createInsertSchema } from "drizzle-zod";
 
-import { sql } from "drizzle-orm";
-import { customType, foreignKey, json, pgPolicy, pgTable, text, timestamp, uuid } from "drizzle-orm/pg-core";
-import * as pp from "drizzle-orm/pg-core"
+import { customType, foreignKey, json, pgTable, timestamp, uuid } from "drizzle-orm/pg-core";
 import { z } from "zod";
-import * as supabaseRoles from "./roles";
 import { AUTH_USER } from "./supabaseTables";
 // import * as x from 'drizzle-orm/
 
@@ -29,7 +26,7 @@ export const USER = pgTable(
     // username: text('username').unique(),
     authUserId: uuid("auth_user_id").notNull(),
     // email: text("email").unique().notNull(),
-    phone: text("phone").unique().notNull(),
+    // phone: text("phone").unique().notNull(),
     // passwordHash: bytea('password_hash').notNull(),
     // salt: bytea('salt').notNull(),
     settings: json("settings")
@@ -49,14 +46,7 @@ export const USER = pgTable(
       name: "profiles_id_fk",
     })
       .onDelete("cascade")
-      .onUpdate("cascade"),
-    foreignKey({
-      columns: [table.phone],
-      // reference to the auth table from Supabase
-      foreignColumns: [AUTH_USER.phone],
-      name: "profiles_phone_fk",
-    }).onDelete("cascade")
-    .onUpdate("cascade"),
+      .onUpdate("cascade")
   ]
 );
 
@@ -72,7 +62,7 @@ const settingsSchema = z.object({
 });
 
 export const userCreateSchema = createInsertSchema(USER, {
-  email: z.string().email("Please provide a valid email."),
+  // email: z.string().email("Please provide a valid email."),
   // username: z
   //   .string()
   //   .min(3, 'Username must be at least 3 characters long.')
