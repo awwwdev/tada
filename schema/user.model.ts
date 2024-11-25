@@ -1,6 +1,7 @@
 import { createInsertSchema } from "drizzle-zod";
 
-import { customType, foreignKey, json, pgTable, timestamp, uuid } from "drizzle-orm/pg-core";
+import { eq, sql, SQL } from "drizzle-orm";
+import { customType, foreignKey, json, pgTable, pgView, text, timestamp, uuid } from "drizzle-orm/pg-core";
 import { z } from "zod";
 import { AUTH_USER } from "./supabaseTables";
 // import * as x from 'drizzle-orm/
@@ -25,20 +26,14 @@ export const USER = pgTable(
     updatedAt: timestamp("updated_at").$onUpdate(() => new Date()),
     // username: text('username').unique(),
     authUserId: uuid("auth_user_id").notNull(),
-    // email: text("email").unique().notNull(),
-    // phone: text("phone").unique().notNull(),
-    // passwordHash: bytea('password_hash').notNull(),
-    // salt: bytea('salt').notNull(),
+    firstname: text("firstname"),
+    lastname: text("lastname"),
+    // fullname: text("fullname").generatedAlwaysAs((): SQL => sql`${USER.firstname} ${USER.lastname}`),
     settings: json("settings")
       .$type<Settings>()
       .default({ theme: "system", showCompletedTasks: true, startOfWeek: "sunday" }),
   },
   (table) => [
-    // pgPolicy(`policy-insert`, {
-    //   for: 'insert',
-    //   to: serviceRole,
-    //   withCheck: sql`false`,
-    // }),
     foreignKey({
       columns: [table.id],
       // reference to the auth table from Supabase
@@ -49,6 +44,16 @@ export const USER = pgTable(
       .onUpdate("cascade")
   ]
 );
+
+export const PROFILE = pgView("profile_view").as((qb) => qb.select({
+  email: AUTH_USER.email,
+  phone: AUTH_USER.phone,
+  settings: USER.settings,
+  firstName: USER.firstname,
+  lastname: USER.lastname,
+  // fullname: USER.fullname,
+  authUserId: AUTH_USER.id,
+}).from(USER).leftJoin(AUTH_USER, eq(USER.authUserId, AUTH_USER.id)));
 
 // export type UserInsert = typeof USER.$inferInsert;
 

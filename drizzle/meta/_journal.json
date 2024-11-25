@@ -36,6 +36,13 @@
       "when": 1732511691536,
       "tag": "0004_glossy_nightshade",
       "breakpoints": true
+    },
+    {
+      "idx": 5,
+      "version": "7",
+      "when": 1732513085501,
+      "tag": "0005_closed_vance_astro",
+      "breakpoints": true
     }
   ]
 }
