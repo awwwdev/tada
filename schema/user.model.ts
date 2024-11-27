@@ -51,6 +51,7 @@ export const USER_VIEW = pgView("user_view").as((qb) => qb.select({
   settings: USER.settings,
   firstName: USER.firstname,
   lastname: USER.lastname,
+  emailConfirmedAt: AUTH_USER.email_confirmed_at,
   // fullname: USER.fullname,
   authUserId: AUTH_USER.id,
 }).from(USER).leftJoin(AUTH_USER, eq(USER.authUserId, AUTH_USER.id)));

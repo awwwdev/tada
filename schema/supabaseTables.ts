@@ -1,12 +1,13 @@
 import { sql } from "drizzle-orm";
-import { bigserial, pgSchema, text, uuid, varchar } from "drizzle-orm/pg-core";
+import { bigserial, pgSchema, text, timestamp, uuid, varchar } from "drizzle-orm/pg-core";
 
 // drizzle-orm/supabase
 const auth = pgSchema('auth');
 export const AUTH_USER = auth.table('users', {
 	id: uuid().primaryKey().notNull(),
   email: varchar({length: 255}),
-	phone: text()
+	phone: text(),
+	email_confirmed_at: timestamp()
 });
 const realtime = pgSchema('realtime');
 export const REALTIME_MESSAGES = realtime.table(
