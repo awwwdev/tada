@@ -13,4 +13,9 @@ export default {
 		user: config().POSTGRESQL_USER,
 		password: config().POSTGRESQL_PASSWORD,
 	},
+	entities: {
+		roles: {
+			provider: "supabase",
+		},
+	},
 } satisfies Config;
