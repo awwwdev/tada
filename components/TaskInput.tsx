@@ -1,3 +1,5 @@
+"use client";
+
 import useUserMe from "@/hooks/useUserMe";
 import QUERY_KEYS from "@/react-query/queryKeys";
 import fetchAPI from "@/utils/fetchAPI";
