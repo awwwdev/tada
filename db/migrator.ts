@@ -11,7 +11,7 @@ import { drizzle } from "drizzle-orm/postgres-js";
 
 
 export default async function migrator() {
-  const migrationConnection = postgres(config().POSTGRESQL_CONNECTION_STRING, { max: 1 });
+  const migrationConnection = postgres(config().ADMIN_POSTGRESQL_CONNECTION_STRING, { max: 1 });
   // const dbClient = getDBClient(connectionString);
   const dbClient = drizzle(migrationConnection);
   // This will run migrations on the database, skipping the ones already applied
