@@ -1,0 +1,2 @@
+DROP VIEW "public"."user_view";--> statement-breakpoint
+CREATE VIEW "public"."user_view" AS (select "auth"."users"."email", "auth"."users"."phone", "user"."settings", "user"."firstname", "user"."lastname", "auth"."users"."email_confirmed_at", "auth"."users"."id" from "user" left join "auth"."users" on "user"."auth_user_id" = "auth"."users"."id");

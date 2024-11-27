@@ -78,6 +78,13 @@
       "when": 1732515939087,
       "tag": "0010_free_goliath",
       "breakpoints": true
+    },
+    {
+      "idx": 11,
+      "version": "7",
+      "when": 1732702197152,
+      "tag": "0011_reflective_silk_fever",
+      "breakpoints": true
     }
   ]
 }
