@@ -1,12 +1,12 @@
 import { Form, useFormHook } from "@/components/react-hook-form";
 import Icon from "@/components/ui/Icon";
-import { createClientForBrowser } from "@/utils/supabase/client";
+import fetchAPI from "@/utils/fetchAPI";
 import { useQueryClient } from "@tanstack/react-query";
 import { useState } from "react";
 import toast from "react-hot-toast";
 import { z } from "zod";
-import { useGlobalContext } from "../Provider";
 import Button from "../ui/Button";
+import { useGlobalContext } from "../Provider";
 
 const schema = z.object({
   email: z
@@ -31,8 +31,7 @@ export default function SignUpBox() {
   // const queryClient = useQueryClient();
 
   const queryClient = useQueryClient();
-  const { setShowAuthModal, setConfirmationModalOpen } = useGlobalContext();
-  const supabase = createClientForBrowser();
+  const { setShowAuthModal } = useGlobalContext();
 
   const onSubmit = async ({
     email,
@@ -48,15 +47,13 @@ export default function SignUpBox() {
       // error message should be farsi if locale is fa.
       throw new Error("Passwords must match. Try again.");
     }
-    // const data = await fetchAPI.POST("/auth/signup", { email, password });
-    const { data, error } = await supabase.auth.signUp({ email, password });
-    if (error) throw error
+    const data = await fetchAPI.POST("/auth/signup", { email, password });
+    if (data.error) throw new Error("Something went wrong");
     toast.success("You are successfully signed up.");
     // queryClient.setQueryData(['userMe'], () => data.user);
-    queryClient.invalidateQueries({ queryKey: ["userMe"] , refetchType: "all" });
+    queryClient.invalidateQueries({ queryKey: ["userMe"], refetchType: "all" });
     queryClient.setQueryData(["userMe"], () => data.user);
     setShowAuthModal(false);
-    setConfirmationModalOpen(true);
   };
 
   const form = useFormHook({ schema, onSubmit });
@@ -88,7 +85,7 @@ export default function SignUpBox() {
             type={isPassVisible ? "text" : "password"}
             required
             label={"Confirm Password"}
-            outerSuffix={
+            outterSuffix={
               <Button iconButton variant="text" type="button" onClick={() => setIsPassVisible((s) => !s)}>
                 <span className="sr-only">Show Password</span>
                 {!isPassVisible && <Icon name="bf-i-ph-eye" subdued={false} />}

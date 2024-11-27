@@ -21,6 +21,9 @@ export default function AccountDropdown() {
           <MenuItem size="xl" className="flex gap-1.5 ">
             <Avatar src="" size="1em" />
             <span className="c-base11">{userMeQ.data?.email}</span>
+            {!userMeQ.data.emailConfirmedAt && (
+              <span className="text-sm c-base11">Please Confirm your email</span>
+            )}
           </MenuItem>
         }
       >

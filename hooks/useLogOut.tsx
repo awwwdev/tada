@@ -1,13 +1,16 @@
 import fetchAPI from '@/utils/fetchAPI';
+import { createClientForBrowser } from "@/utils/supabase/client";
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import toast from 'react-hot-toast';
 
 export default () => {
   const queryClient = useQueryClient();
-
+  const supabase = createClientForBrowser();
   return  useMutation({
     mutationFn: async () => {
-      const data = await fetchAPI.POST(`/auth/logout`);
+      // const data = await fetchAPI.POST(`/auth/logout`);
+      const { error } = await supabase.auth.signOut();
+      if ( error ) throw new Error(error.message);
       // queryClient.invalidateQueries({ queryKey: ["userMe"] });
     },
     onError: (err) => {

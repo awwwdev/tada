@@ -31,6 +31,8 @@ type ContextType = {
   setSettingsPanelOpen: React.Dispatch<SetStateAction<boolean>>;
   showAuthModal: boolean;
   setShowAuthModal: React.Dispatch<SetStateAction<boolean>>;
+  confirmationModalOpen: boolean;
+  setConfirmationModalOpen: React.Dispatch<SetStateAction<boolean>>;
 };
 const GlobalContext = createContext<ContextType>({
   isSideMenuOpen: false,
@@ -49,7 +51,9 @@ const GlobalContext = createContext<ContextType>({
   settingsPanelOpen: false,
   setSettingsPanelOpen: () => {},
   showAuthModal: false,
-  setShowAuthModal: () => {}
+  setShowAuthModal: () => {},
+  confirmationModalOpen: false,
+  setConfirmationModalOpen: () => {}
 });
 
 export default function Providers({
@@ -71,6 +75,8 @@ export default function Providers({
   const [settingsPanelOpen, setSettingsPanelOpen] = useState(false);
 
   const [showAuthModal, setShowAuthModal] = useState(false);
+  const [confirmationModalOpen, setConfirmationModalOpen] = useState(false);
+
 
   const setSelectedUserListId = (id: string) => {
     _setCurrentList({id, type: 'user-list'});
@@ -78,6 +84,7 @@ export default function Providers({
   const setSelectedSmartListId = (id: SmartListId) => {
     _setCurrentList({id, type: 'smart-list'});
   }
+
 
 
 
@@ -100,13 +107,20 @@ export default function Providers({
         settingsPanelOpen,
         setSettingsPanelOpen,
         setShowAuthModal,
-        showAuthModal
+        showAuthModal,
+        confirmationModalOpen,
+        setConfirmationModalOpen
       }}
     >
       {children}
       <Modal open={showAuthModal} setOpen={setShowAuthModal} title="Please Sign-up or Login first">
         <LoginOrSignUpBox initialTab="login" />
       </Modal>
+      <Modal open={confirmationModalOpen} setOpen={setConfirmationModalOpen}>
+        <p>Please confirm your email first..</p>
+        <p className="text-sm c-base11">We sent you a new confirmation link to your email.</p>
+      </Modal>
+
 
     </GlobalContext.Provider>
   );
