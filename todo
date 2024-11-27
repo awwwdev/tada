@@ -1,6 +1,14 @@
 auth.users + user + user view (insert in profile + insert in user)
 auth.user + profile (triggers + functions) insert in profile
 
+
++ run supabase start on a good net
++ use supabase dev url
++ supabase throws if error function 
+
+use drizzle-supabase to fetch data
+make pages to server components 
+
 workflow ->
 ✅ setup supabase local for development
 ✅ define schema in drizzle
