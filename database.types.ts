@@ -187,7 +187,7 @@ export type Database = {
       task: {
         Row: {
           archived: boolean | null
-          author: string | null
+          author_id: string | null
           created_at: string
           deleted: boolean | null
           due_at: string | null
@@ -204,7 +204,7 @@ export type Database = {
         }
         Insert: {
           archived?: boolean | null
-          author?: string | null
+          author_id?: string | null
           created_at?: string
           deleted?: boolean | null
           due_at?: string | null
@@ -221,7 +221,7 @@ export type Database = {
         }
         Update: {
           archived?: boolean | null
-          author?: string | null
+          author_id?: string | null
           created_at?: string
           deleted?: boolean | null
           due_at?: string | null
@@ -238,8 +238,8 @@ export type Database = {
         }
         Relationships: [
           {
-            foreignKeyName: "task_author_user_id_fk"
-            columns: ["author"]
+            foreignKeyName: "task_author_id_user_id_fk"
+            columns: ["author_id"]
             isOneToOne: false
             referencedRelation: "user"
             referencedColumns: ["id"]
@@ -257,32 +257,54 @@ export type Database = {
         Row: {
           auth_user_id: string
           created_at: string
-          email: string
+          firstname: string | null
           id: string
+          lastname: string | null
           settings: Json | null
           updated_at: string | null
         }
         Insert: {
           auth_user_id: string
           created_at?: string
-          email: string
+          firstname?: string | null
           id?: string
+          lastname?: string | null
           settings?: Json | null
           updated_at?: string | null
         }
         Update: {
           auth_user_id?: string
           created_at?: string
-          email?: string
+          firstname?: string | null
           id?: string
+          lastname?: string | null
           settings?: Json | null
           updated_at?: string | null
         }
-        Relationships: []
+        Relationships: [
+          {
+            foreignKeyName: "profiles_id_fk"
+            columns: ["id"]
+            isOneToOne: true
+            referencedRelation: "user_view"
+            referencedColumns: ["id"]
+          },
+        ]
       }
     }
     Views: {
-      [_ in never]: never
+      user_view: {
+        Row: {
+          email: string | null
+          email_confirmed_at: string | null
+          firstname: string | null
+          id: string | null
+          lastname: string | null
+          phone: string | null
+          settings: Json | null
+        }
+        Relationships: []
+      }
     }
     Functions: {
       [_ in never]: never
