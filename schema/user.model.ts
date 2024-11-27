@@ -1,6 +1,6 @@
 import { createInsertSchema } from "drizzle-zod";
 
-import { eq } from "drizzle-orm";
+import { eq, InferModelFromColumns, InferSelectModel } from "drizzle-orm";
 import { customType, foreignKey, json, pgTable, pgView, text, timestamp, uuid } from "drizzle-orm/pg-core";
 import { z } from "zod";
 import { AUTH_USER } from "./supabaseTables";
@@ -53,6 +53,7 @@ export const USER_VIEW = pgView("user_view").as((qb) => qb.select({
   lastname: USER.lastname,
   emailConfirmedAt: AUTH_USER.email_confirmed_at,
   // fullname: USER.fullname,
+  id: AUTH_USER.id,
   authUserId: AUTH_USER.id,
 }).from(USER).leftJoin(AUTH_USER, eq(USER.authUserId, AUTH_USER.id)));
 
@@ -89,3 +90,6 @@ export const userUpdateSchema = userCreateSchema.partial();
 export type User = typeof USER.$inferSelect;
 export type NewUser = z.infer<typeof userCreateSchema>;
 export type UpdateUser = z.infer<typeof userUpdateSchema>;
+
+
+export type UserView = InferModelFromColumns<typeof USER_VIEW['_']['selectedFields']> & { id: string };
