@@ -9,6 +9,11 @@ auth.user + profile (triggers + functions) insert in profile
 use drizzle-supabase to fetch data
 make pages to server components 
 
+/ => fetch all tasks 
+/list/[listId] => fetch all tasks in list
+
+/task/[taskId] => fetch task
+
 workflow ->
 ✅ setup supabase local for development
 ✅ define schema in drizzle
