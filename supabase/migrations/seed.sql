@@ -1,6 +1,6 @@
 CREATE USER rls_client
 WITH
-  LOGIN PASSWORD 'postgres';
+  LOGIN PASSWORD 'replace-with-rls_client_password-from-env';
 
 GRANT anon TO rls_client;
 
