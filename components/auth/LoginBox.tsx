@@ -1,3 +1,5 @@
+"use client";
+
 import { Form, useFormHook } from "@/components/react-hook-form";
 import { useState } from "react";
 import { z } from "zod";
@@ -23,7 +25,7 @@ export default function LoginBox() {
   const supabase = createClientForBrowser();
   const onSubmit = async ({ email, password }: { email: string; password: string }) => {
     // const data = await fetchAPI.POST("/auth/login/with-password", { email, password });
-    const { data, error } = await supabase.auth.signInWithPassword({ email, password });
+    const { data, error } = await supabase.auth.signInWithPassword({ email, password } ) ;
     if (error) {
       if (error.code === "email_not_confirmed") {
         const { error } = await supabase.auth.resend({
@@ -37,7 +39,7 @@ export default function LoginBox() {
       }
     } else {
       toast.success("You are Logged in.");
-      queryClient.setQueryData(["userMe"], () => data.user);
+      // queryClient.setQueryData(["userMe"], () => data.user);
       queryClient.invalidateQueries({ queryKey: ["userMe"], refetchType: "all" });
       queryClient.removeQueries(); // removes cached data for all queries
       await queryClient.resetQueries(); // reset all queyries to their initial state

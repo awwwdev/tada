@@ -54,7 +54,6 @@ export default function SignUpBox() {
     toast.success("You are successfully signed up.");
     // queryClient.setQueryData(['userMe'], () => data.user);
     queryClient.invalidateQueries({ queryKey: ["userMe"] , refetchType: "all" });
-    queryClient.setQueryData(["userMe"], () => data.user);
     setShowAuthModal(false);
     setConfirmationModalOpen(true);
   };
