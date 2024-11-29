@@ -56,25 +56,25 @@ export const metadata: Metadata = {
   },
 };
 
+export default async function RootLayout({ children }: { children: React.ReactNode }) {
+  const queryClient = getQueryClient();
 
-
-
-export default function RootLayout({ children }: { children: React.ReactNode }) {
-
-const queryClient = getQueryClient();
-
-queryClient.prefetchQuery({
-  queryKey: ['userMe'],
-  queryFn: async () => {
-    const supabase = createClientForServer();
-    const { data, error } = await supabase.auth.getUser();
-    if (error) throw error;
-    if (!data.user) return null;
-    const { data: userView, error: userViewError } = await supabase.from("user_view").select().eq("id", data.user.id).single();
-    if (userViewError) throw userViewError;
-    return userView;  
-  }
-})
+  queryClient.prefetchQuery({
+    queryKey: ["userMe"],
+    queryFn: async () => {
+      const supabase = createClientForServer();
+      const { data, error } = await supabase.auth.getUser();
+      if (error) throw error;
+      if (!data.user) return null;
+      const { data: userView, error: userViewError } = await supabase
+        .from("user_view")
+        .select()
+        .eq("id", data.user.id)
+        .single();
+      if (userViewError) throw userViewError;
+      return userView;
+    },
+  });
 
   const theme = cookies().get("theme")?.value;
   const useSystemTheme = cookies().get("useSystemTheme")?.value === "true" ? true : false;
@@ -90,15 +90,14 @@ queryClient.prefetchQuery({
               <main
                 className={`grid  overflow-hidden 
         grid-cols-[1fr]
-        sm:grid-cols-[min(20%,15rem)_3fr_3fr]`}
+        sm:grid-cols-[min(20%,15rem)_1fr]`}
               >
                 <SideMenu />
-                <div className="grid gap-0 py-6 overflow-hidden " style={{ gridTemplateRows: "1fr auto" }}>
+                <div className="grid gap-0  overflow-hidden " style={{ gridTemplateRows: "1fr auto" }}>
                   {/* <UserOrSmartList /> */}
                   {children}
                   {/* <TaskInput /> */}
                 </div>
-                <TaskDetailsPanel />
               </main>
               <SettingsDrawer />
             </div>

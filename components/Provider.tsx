@@ -1,8 +1,8 @@
 "use client";
 
-import SMART_LIST_IDS from '@/constants/smartListIds';
 import useUserMe from "@/hooks/useUserMe";
-import { CurrentList, Settings, SmartListId } from "@/types";
+import { SMART_LIST_IDS } from "@/schema/smartListTask.model";
+import { CurrentList, SmartListId } from "@/types";
 import type * as React from "react";
 import { createContext, SetStateAction, useContext, useState } from "react";
 import LoginOrSignUpBox from './auth/LoginOrSignUpBox';
@@ -21,7 +21,7 @@ type ContextType = {
   setSelectedUserListId: (listId: string) => void;
   setSelectedSmartListId: (listId: SmartListId) => void;
   setSelectedTaskId: React.Dispatch<SetStateAction<string | null>>;
-  theme: Settings["theme"];
+  theme: any;
   useSystemTheme: boolean;
   listsPanelOpen: boolean;
   detailsPanelOpen: boolean;
@@ -62,7 +62,7 @@ export default function Providers({
   useSystemTheme,
 }: {
   children: React.ReactNode;
-  theme: Settings["theme"];
+  theme: any;
   useSystemTheme: boolean;
 }) {
   useUserMe(); // to initialize userMe

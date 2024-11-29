@@ -48,7 +48,7 @@ export default function Page() {
               layout
               layoutId={index}
               key={index}
-              className="p-4 rd-2 bg-base3 ???"
+              className="p-4 rd-2 bg-base3"
               draggable
               onDragStart={() => (dragItem.current = index)}
               onDragEnter={() => (draggedOverItem.current = index)}

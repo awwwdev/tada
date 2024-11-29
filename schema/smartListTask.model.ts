@@ -1,11 +1,29 @@
 import { createInsertSchema } from 'drizzle-zod';
 
-import { decimal, pgTable, uuid, timestamp, primaryKey, pgEnum, unique } from 'drizzle-orm/pg-core';
+import { decimal, pgEnum, pgTable, timestamp, unique, uuid } from 'drizzle-orm/pg-core';
 import { z } from 'zod';
 import { TASK } from './task.model';
 
-export const SMART_LIST_IDS = ['all-tasks', 'starred', 'pinned', 'archived', 'deleted'] as const
-export const SmartListIdEnum = pgEnum('smart_list_id', SMART_LIST_IDS);
+export const SMART_LIST_IDS = {
+  ALL_TASKS: 'all-tasks',
+  // DO_TODAY: "DO_TODAY",
+  // DO_TOMORROW: "DO_TOMORROW",
+  // DO_LATER: "DO_LATER",
+  // NEXT_WEEK: "NEXT_WEEK",
+  // ASSIGNED: "ASSIGNED",
+  // ASSIGNED_TO_ME: "ASSIGNED_TO_ME",
+  // WITH_REMINDERS: "WITH_REMINDERS",
+  // ROUTINES: "ROUTINES",
+  ARCHIVED: "archived",
+  DELETED: "deleted",
+  STARRED: "starred",
+  PINNED: "pinned",
+  // WITH_DUE_DATES: "WITH_DUE_DATES",
+} as const satisfies Record<string, string>;
+
+const SMART_LIST_IDS_ARRAY = Object.values(SMART_LIST_IDS);
+
+export const SmartListIdEnum = pgEnum('smart_list_id', SMART_LIST_IDS_ARRAY as [string, ...string[]]);
 
 export const SMART_LIST_TASK = pgTable('smart_list_task', {
   id: uuid('id').primaryKey().defaultRandom(),

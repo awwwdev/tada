@@ -160,7 +160,7 @@ const Card = ({ title, id, column, handleDragStart }) => {
         layoutId={id}
         draggable={true}
         onDragStart={(e) => handleDragStart(e, { title, id, column })}
-        className="cursor-grab rounded b-1 b-base5 ??? bg-neutral-800 p-3 active:cursor-grabbing"
+        className="cursor-grab rounded b-1 b-base5 bg-neutral-800 p-3 active:cursor-grabbing"
       >
         <p className="text-sm text-neutral-100">{title}</p>
       </motion.div>
@@ -173,7 +173,7 @@ const DropIndicator = ({ beforeId, column }) => {
     <div
       data-before={beforeId || "-1"}
       data-column={column}
-      className="my-0.5 h-0.5 w-full bg-accent69opacity-0 ????"
+      className="my-0.5 h-0.5 w-full bg-accent69opacity-0 "
     />
   );
 };

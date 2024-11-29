@@ -3,7 +3,7 @@
 export default function Page() {
 
   return (
-    <div>
+    <div className="">
       Please select a list from the side.
     </div>
   );

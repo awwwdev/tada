@@ -3,19 +3,19 @@
 import Icon from "@/components/ui/Icon";
 
 import { useGlobalContext } from "@/components/Provider";
-import SMART_LIST_IDS from "@/constants/smartListIds";
+import { useParams } from "next/navigation";
 import React from "react";
 import LinkButton from "../ui/Button/LinkButton";
+import { SMART_LIST_IDS } from "@/schema/smartListTask.model";
 
 export default function SmartLists() {
-  const { setSelectedSmartListId, currentList, setListsPanelOpen } = useGlobalContext();
-
+  const params = useParams<{ listId: string }>()
   return (
     <ul className="flex flex-col gap-3  ">
       <MenuItemLocal
         icon="bf-i-ph-house-simple"
         href="/list/all-tasks"
-        active={currentList.id === SMART_LIST_IDS.ALL_TASKS}
+        active={params.listId === SMART_LIST_IDS.ALL_TASKS}
       >
         All Tasks
       </MenuItemLocal>
@@ -32,7 +32,7 @@ export default function SmartLists() {
         //   setListsPanelOpen(false);
         // }}
         href="/list/starred"
-        active={currentList.id === SMART_LIST_IDS.STARRED}
+        active={params.listId === SMART_LIST_IDS.STARRED}
       >
         Starred
       </MenuItemLocal>

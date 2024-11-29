@@ -24,16 +24,14 @@ export default async function Layout({
 
   if (!user) {
     return (
-      <div className="flex gap-3">
-      <div>
+      <div className="grid " style={{ gridTemplateColumns: "1fr 1fr" }}>
+        <div></div>
+        <>{children}</>
       </div>
-      <>{children}</>
-    </div>
-
-    )
+    );
   }
 
-  let isSmartList = SMART_LIST_IDS.some((item) => item === listId);
+  let isSmartList = Object.values(SMART_LIST_IDS).some((item) => item === listId);
 
   const listName = "ListName";
   let smartListTasks: Task[] = [];
@@ -60,11 +58,11 @@ export default async function Layout({
     userListTasks = listTasks.map((t) => t.task);
   }
 
-  console.log('re run in list/[listId] layout')
+  console.log("re run in list/[listId] layout");
 
   return (
-    <div className="flex gap-3">
-      <div>
+    <div className="grid" style={{gridTemplateColumns: "1fr 1fr"}}>
+      <div className="py-6">
         {isSmartList ? (
           <SmartList listId={listId as SmartListId} tasks={smartListTasks} />
         ) : (
