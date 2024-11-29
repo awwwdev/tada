@@ -1,4 +1,5 @@
 import SmartList from "@/components/SmartList";
+import TaskInput from "@/components/TaskInput";
 import UserList from "@/components/UserList";
 import { createDrizzleSupabaseClient } from "@/db/db";
 import { LIST_TASK } from "@/schema/listTask.model";
@@ -62,12 +63,13 @@ export default async function Layout({
 
   return (
     <div className="grid" style={{gridTemplateColumns: "1fr 1fr"}}>
-      <div className="py-6">
+      <div className="py-6 grid" style={{gridTemplateRows: "1fr auto"}}>
         {isSmartList ? (
           <SmartList listId={listId as SmartListId} tasks={smartListTasks} />
         ) : (
           <UserList listId={listId} tasks={userListTasks} listName={userListName ?? ""} />
         )}
+        <TaskInput />
       </div>
       <>{children}</>
     </div>

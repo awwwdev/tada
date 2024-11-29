@@ -74,7 +74,7 @@ href,
 }) {
   return (
     <li>
-      <LinkButton href={href} variant="text" className={`w-full rd-2 hover:bg-base5 block ${active ? "bg-base6" : ""}`} preStyled={false}>
+      <LinkButton href={href} variant="text" className={`w-full rd-2 hover:bg-base5 flex items-center ${active ? "bg-base6" : ""}`} preStyled={false}>
         {/* <MenuItem size="xl"> */}
           <Icon name={icon} className="mie-1.5 c-base11" />
           {children}{" "}
