@@ -17,16 +17,3 @@ export default function useUserMe() {
     }
   });
 }
-
-
-// const getSupabaseAuthUser = async (supabase) => {
-//   const sessionRes = await supabase.auth.getSession();
-//   console.log("🚀 ~ sessionRes:", sessionRes)
-//   if (!sessionRes) return null;
-//   if (sessionRes.error) throw new Error(sessionRes.error.message);
-//   console.log("🚀 ~ sessionRes?.data:", sessionRes?.data)
-//   if (!sessionRes?.data?.session) return null;
-//   const userAuthMe = sessionRes?.data?.session?.user;
-//   console.log("🚀 ~ userAuthMe:", userAuthMe)
-//   return userAuthMe;
-// };

@@ -46,7 +46,6 @@ export default async function Layout({
         where: eq(TASK.authorId, user?.id ?? ""),
       })
     );
-    console.log("🚀 ~ smartListTasks:", smartListTasks)
   } else {
     const listTasks = await db(async (tx) =>
       tx.query.LIST_TASK.findMany({

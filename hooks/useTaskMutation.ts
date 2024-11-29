@@ -9,7 +9,6 @@ export default function useTaskMutation() {
 
   return useMutation({
     mutationFn: async ({ id, ...updates }: Partial<TaskFields> & { id: string }) => {
-      console.log("🚀 ~ updates:", updates);
       return fetchAPI.PATCH(`/tasks/${id}`, { ...updates, id: undefined });
     },
     onError: (err) => {
