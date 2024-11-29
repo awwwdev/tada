@@ -1,3 +1,5 @@
+supabase benefits: auth + storage + real time chat ?
+
 auth.users + user + user view (insert in profile + insert in user)
 auth.user + profile (triggers + functions) insert in profile
 

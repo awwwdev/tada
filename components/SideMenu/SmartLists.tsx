@@ -1,12 +1,11 @@
 "use client";
 
-import Button from "@/components/ui/Button";
 import Icon from "@/components/ui/Icon";
 
 import { useGlobalContext } from "@/components/Provider";
 import SMART_LIST_IDS from "@/constants/smartListIds";
 import React from "react";
-import MenuItem from "../ui/MenuItem/MenuItem";
+import LinkButton from "../ui/Button/LinkButton";
 
 export default function SmartLists() {
   const { setSelectedSmartListId, currentList, setListsPanelOpen } = useGlobalContext();
@@ -15,10 +14,7 @@ export default function SmartLists() {
     <ul className="flex flex-col gap-3  ">
       <MenuItemLocal
         icon="bf-i-ph-house-simple"
-        onClick={() => {
-          setSelectedSmartListId(SMART_LIST_IDS.ALL_TASKS);
-          setListsPanelOpen(false);
-        }}
+        href="/list/all-tasks"
         active={currentList.id === SMART_LIST_IDS.ALL_TASKS}
       >
         All Tasks
@@ -31,10 +27,11 @@ export default function SmartLists() {
       </MenuItemLocal> */}
       <MenuItemLocal
         icon="bf-i-ph-star"
-        onClick={() => {
-          setSelectedSmartListId(SMART_LIST_IDS.STARRED);
-          setListsPanelOpen(false);
-        }}
+        // onClick={() => {
+        //   setSelectedSmartListId(SMART_LIST_IDS.STARRED);
+        //   setListsPanelOpen(false);
+        // }}
+        href="/list/starred"
         active={currentList.id === SMART_LIST_IDS.STARRED}
       >
         Starred
@@ -67,22 +64,22 @@ export default function SmartLists() {
 function MenuItemLocal({
   icon,
   children,
-  onClick,
+href,
   active,
 }: {
   icon: string;
   children: React.ReactNode;
-  onClick?: () => void;
+  href: string;
   active?: boolean;
 }) {
   return (
     <li>
-      <Button variant="text" className={`w-full rd-2 hover:bg-base5 ${active ? "bg-base6" : ""}`} preStyled={false} onClick={onClick}>
-        <MenuItem size="xl">
+      <LinkButton href={href} variant="text" className={`w-full rd-2 hover:bg-base5 block ${active ? "bg-base6" : ""}`} preStyled={false}>
+        {/* <MenuItem size="xl"> */}
           <Icon name={icon} className="mie-1.5 c-base11" />
           {children}{" "}
-        </MenuItem>
-      </Button>
+        {/* </MenuItem> */}
+      </LinkButton>
     </li>
   );
 }

@@ -1,9 +1,11 @@
+"use client";
+
 import { SmartListId, Task } from "@/types";
 import fetchAPI from "@/utils/fetchAPI";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import List from "../List";
 
-export default function SmartList({ listId }: { listId: SmartListId }) {
+export default function SmartList({ listId, tasks }: { listId: SmartListId , tasks: Task[] }) {
   const tasksQ = useQuery<Task[]>({
     queryKey: ["tasks"], // TODO add query key per list and send filters to api
     queryFn: () => fetchAPI.GET(`/tasks`),
@@ -12,8 +14,8 @@ export default function SmartList({ listId }: { listId: SmartListId }) {
   const queryClient = useQueryClient();
   return (
     <List
-      tasks={tasksQ.data ?? []}
-      setTasks={(data) => queryClient.setQueryData(["tasks"], data)}
+      tasks={tasks}
+      // setTasks={(data) => queryClient.setQueryData(["tasks"], data)}
       listName={<span className="capitalize">{listId.replaceAll("_", " ").toLowerCase()}</span>}
     />
   );

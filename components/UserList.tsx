@@ -1,38 +1,38 @@
 "use client";
 
-import type { List as ListType, Task, ListTask } from "@/types";
+import type { ListTask, List as ListType, Task } from "@/types";
 import fetchAPI from "@/utils/fetchAPI";
-import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 
-import UserListDropDown from "./UserListDropDown";
 import List from "./List";
-import { listHues } from "@/constants/listHues";
+import UserListDropDown from "./UserListDropDown";
+// import { listHues } from "@/constants/listHues";
 import useList from "@/hooks/useList";
 // import useList from "@/hooks/useList";
 
-export default function UserList({ listId }: { listId: string }) {
-  const listQ = useList({ listId });
+export default function UserList({ listId, tasks , listName}: { listId: string, tasks: Task[] , listName: string}) {
+  const  istQ = useList({ listId });
 
   function calculateNewOrderValue(reorderedTasks: Task[], oldOrderedTasks: Task[], movedTaskId: string) {
     const indexTaskMovedTo = reorderedTasks.findIndex((item, index) => item.id === movedTaskId);
     const movedTask = reorderedTasks[indexTaskMovedTo];
 
     if (indexTaskMovedTo === 0) {
-      const orderOfFirstTask = listQ.data?.tasks.find((t) => t.taskId === oldOrderedTasks[0].id)?.orderInList;
+      const orderOfFirstTask = tasks.find((t) => t.taskId === oldOrderedTasks[0].id)?.orderInList;
       return { movedTaskId: movedTask.id, newOrderValue: (1000 * Number(orderOfFirstTask)) / 1001 };
     }
     if (indexTaskMovedTo === reorderedTasks.length - 1) {
-      const orderOfLastTask = listQ.data?.tasks.find(
+      const orderOfLastTask = tasks.find(
         (t) => t.taskId === oldOrderedTasks[oldOrderedTasks.length - 1].id
       )?.orderInList;
       return { movedTaskId: movedTask.id, newOrderValue: Number(orderOfLastTask) + 2 };
     }
 
-    const orderOfTaskAfter = listQ.data?.tasks.find(
+    const orderOfTaskAfter = tasks.find(
       (t) => t.taskId === reorderedTasks[indexTaskMovedTo + 1].id
     )?.orderInList;
 
-    const orderOfTaskBefore = listQ.data?.tasks.find(
+    const orderOfTaskBefore = tasks.find(
       (t) => t.taskId === reorderedTasks[indexTaskMovedTo - 1].id
     )?.orderInList;
 
@@ -54,7 +54,7 @@ export default function UserList({ listId }: { listId: string }) {
 
       queryClient.setQueryData(["tasks", "lists", listId], (listWithTasks: ListWithTasks) => {
         const tasks = listWithTasks.tasks;
-        const newTasks = tasks.map((task) => {
+        const newTasks = tasks.map((task: Task) => {
           if (task.id === variables.taskId) {
             return { ...task, orderInList: variables.orderInList };
           }
@@ -90,24 +90,24 @@ export default function UserList({ listId }: { listId: string }) {
   type ListTaskWithTask = ListTask & { task: Task };
   type ListWithTasks = ListType & { tasks: ListTaskWithTask[] };
 
-  const listHue = listQ.data?.theme?.hue;
+  // const listHue = listQ.data?.theme?.hue;
 
   return (
     <List
-      colorClassName={listHue ? listHues[listHue] : ""}
-      tasks={listQ.data?.tasks.map((t) => t.task) ?? []}
-      listName={listQ.data?.name ?? ""}
+      // colorClassName={listHue ? listHues[listHue] : ""}
+      tasks={tasks.map((t) => t.task) ?? []}
+      listName={listName}
       listControls={<UserListDropDown listId={listId} />}
       handleReorder={handleReorder}
-      setTasks={(newTasks: Task[]) => {
-        queryClient.setQueryData(["tasks", "lists", listId], (listWithTasks: ListWithTasks) => {
-          const newListTasks = newTasks.map((task) => {
-            const listTask = listQ.data?.tasks.find((t) => t.taskId === task.id);
-            return listTask;
-          });
-          return { ...listQ.data, tasks: newListTasks };
-        });
-      }}
+      // setTasks={(newTasks: Task[]) => {
+      //   queryClient.setQueryData(["tasks", "lists", listId], (listWithTasks: ListWithTasks) => {
+      //     const newListTasks = newTasks.map((task) => {
+      //       const listTask = listQ.data?.tasks.find((t) => t.taskId === task.id);
+      //       return listTask;
+      //     });
+      //     return { ...listQ.data, tasks: newListTasks };
+      //   });
+      // }}
     />
   );
 }

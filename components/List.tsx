@@ -14,14 +14,14 @@ import { useState } from "react";
 
 export default function List({
   tasks,
-  setTasks,
+  // setTasks,
   listName,
   listControls,
   colorClassName = "",
   handleReorder,
 }: {
   tasks: Task[];
-  setTasks?: (tasks: Task[]) => void;
+  // setTasks?: (tasks: Task[]) => void;
   listName: React.ReactNode;
   listControls?: React.ReactNode;
   colorClassName?: string;
@@ -71,7 +71,7 @@ export default function List({
               values={tasks}
               onReorder={(reorderedTasks) => {
                 if (handleReorder) {
-                  setTasks?.(reorderedTasks);
+                  // setTasks?.(reorderedTasks);
                   setTempTasks(reorderedTasks);
                 }
               }}
@@ -217,7 +217,7 @@ function ListItemTemplate({ item, itemSelected, dragHandleProps }: TemplateProps
         <TaskItem
           task={item}
           // setTask={(newTask) => updateTaskById({ id: item.id, task: newTask })}
-          dragHandleProps={dragHandleProps}
+          // dragHandleProps={dragHandleProps}
         />
       </div>
     </div>
