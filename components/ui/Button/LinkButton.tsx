@@ -1,9 +1,10 @@
 "use client";
 
+import Link from 'next/link';
 import { forwardRef } from "react";
 import { getSizeStyles, Size } from "../ui-config";
+import { classes } from './classes'; 
 import { ButtonProps } from './types';
-import { classes } from './classes';
 
 type Ref = HTMLAnchorElement;
 type AllProps = React.ComponentPropsWithoutRef<"a"> & Omit<ButtonProps, "isLoading"> & { href: string; size?: Size };
@@ -27,7 +28,7 @@ const LinkButton = forwardRef<Ref, AllProps>(function (
   `;
 
   return (
-    <a
+    <Link
       ref={ref}
       href={href}
       className={`${preStyled ? cls : ""} ${className}`}
@@ -39,7 +40,7 @@ const LinkButton = forwardRef<Ref, AllProps>(function (
       {...props}
     >
       {children}
-    </a>
+    </Link>
   );
 });
 
