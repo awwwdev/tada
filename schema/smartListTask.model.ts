@@ -4,7 +4,8 @@ import { decimal, pgTable, uuid, timestamp, primaryKey, pgEnum, unique } from 'd
 import { z } from 'zod';
 import { TASK } from './task.model';
 
-export const SmartListIdEnum = pgEnum('smart_list_id', ['all-tasks', 'starred', 'pinned', 'archived', 'deleted']);
+export const SMART_LIST_IDS = ['all-tasks', 'starred', 'pinned', 'archived', 'deleted'] as const
+export const SmartListIdEnum = pgEnum('smart_list_id', SMART_LIST_IDS);
 
 export const SMART_LIST_TASK = pgTable('smart_list_task', {
   id: uuid('id').primaryKey().defaultRandom(),

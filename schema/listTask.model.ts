@@ -15,8 +15,7 @@ export const LIST_TASK = pgTable('list_task', {
     .references(() => TASK.id)
     .notNull(),
   orderInList: decimal('order_in_list').default('1').notNull(),
-}
-  ,
+},
   (table) => ({
     unique1: unique('Each task can be repeated once in a list').on(table.listId, table.taskId),
     // check1: check("userListId or smartListId must be set", sql`num_nonnulls(${table.smartListId},${table.listId}) = 1`),
