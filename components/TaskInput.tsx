@@ -1,36 +1,40 @@
 "use client";
 
+import useList from "@/hooks/useList";
 import useUserMe from "@/hooks/useUserMe";
 import QUERY_KEYS from "@/react-query/queryKeys";
+import { SMART_LIST_IDS } from "@/schema/smartListTask.model";
 import fetchAPI from "@/utils/fetchAPI";
+// import { NewTask } from "@tada/backend";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import { useParams } from "next/navigation";
 import { useRef } from "react";
 import toast from "react-hot-toast";
 import { useLocalStorage } from "usehooks-ts";
 import { useGlobalContext } from "./Provider";
 import Button from "./ui/Button";
 import Input from "./ui/Input";
-import { NewTask } from "@tada/backend";
-import useList from "@/hooks/useList";
-import useTasks from "@/hooks/useTasks";
 
 export default function TaskInput() {
   const queryClient = useQueryClient();
-  const [draft, setDraft, removeValue] = useLocalStorage<NewTask>("draft-task", {
+  const [draft, setDraft, removeValue] = useLocalStorage<any>("draft-task", {
     label: "",
     status: "to-do",
     authorId: "",
   });
   const userMeQ = useUserMe();
-  const { currentList, setShowAuthModal } = useGlobalContext();
+  const {  setShowAuthModal } = useGlobalContext();
+  const params = useParams<{ listId: string }>();
 
-  const listId = currentList.type === "user-list" ? currentList.id : "";
+  const listId = params.listId;
+  const isSmartList = Object.values(SMART_LIST_IDS).some(item => item === listId);
   // const tasksQ = useTasks({ listId: currentList.type === "user-list" ? currentList.id : "" });
   const listQ = useList({ listId });
+
   const smartListTasks = useQuery({
     queryKey: ["smart-list-tasks"],
-    queryFn: () => fetchAPI.GET(`/tasks?smartListId=${currentList.id}`),
-    enabled: !!currentList.id && currentList.type === "smart-list",
+    queryFn: () => fetchAPI.GET(`/tasks?smartListId=${listId}`),
+    enabled: !!listId && !isSmartList,
   })
 
   const addTaskM = useMutation({
@@ -39,7 +43,7 @@ export default function TaskInput() {
       if (listId !== "" && listQ.data) {
         maxOrderInList = Math.max(...listQ.data?.tasks.map((listTask) => Number(listTask.orderInList)));
       }
-      return fetchAPI.POST(`/tasks${currentList.type === "user-list" ? `?listId=${currentList.id}` : `?smartListId=${currentList.id}`}`, {
+      return fetchAPI.POST(`/tasks${isSmartList ? `?smartListId=${listId}` : `?listId=${listId}`}`, {
         task: {
           ...task,
           authorId: userMeQ.data?.id,
